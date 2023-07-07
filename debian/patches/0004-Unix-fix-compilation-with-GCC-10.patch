@@ -1,0 +1,34 @@
+From e4f91ee4cb11a10df6a61ab4ffcdc8e2da3c3483 Mon Sep 17 00:00:00 2001
+From: Vincent Bernat <vincent@bernat.ch>
+Date: Mon, 28 Sep 2020 16:30:56 +0200
+Subject: Unix: fix compilation with GCC 10
+
+GCC 10 will now error when declaring a global variable twice:
+
+  https://gcc.gnu.org/gcc-10/porting_to.html#common
+
+Fix this issue by declaring the variable as `extern' in `krt.h'.
+The variable is really declared in `krt.c'.
+
+Bug-Debian: https://bugs.debian.org/957045
+Origin: upstream, https://gitlab.nic.cz/labs/bird/-/commit/e4f91ee4cb11a10df6a61ab4ffcdc8e2da3c3483
+---
+ sysdep/unix/krt.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sysdep/unix/krt.h b/sysdep/unix/krt.h
+index d4a8717e..fe79efc3 100644
+--- a/sysdep/unix/krt.h
++++ b/sysdep/unix/krt.h
+@@ -112,7 +112,7 @@ struct kif_proto {
+   struct kif_state sys;		/* Sysdep state */
+ };
+ 
+-struct kif_proto *kif_proto;
++extern struct kif_proto *kif_proto;
+ 
+ #define KIF_CF ((struct kif_config *)p->p.cf)
+ 
+-- 
+2.27.0
+

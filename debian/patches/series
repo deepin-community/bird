@@ -1,0 +1,4 @@
+0001-Link-using-ld.patch
+0002-Split-example-config-files.patch
+0003-Sync-the-linuxdoc-mangled-files-with-linuxdoc-tools_.patch
+0004-Unix-fix-compilation-with-GCC-10.patch
